@@ -5,7 +5,7 @@
 	<groupId>DiCNesAccRoss</groupId>
 	<artifactId>TakeMyPetBeta</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
-	<packaging>war</packaging>
+	<packaging>jar</packaging>
 	<properties>
 		<junit.version>4.11</junit.version>
 		<logback.version>1.1.2</logback.version>
@@ -64,7 +64,7 @@
           <manifest>
             <addClasspath>true</addClasspath>
             <classpathPrefix>lib/</classpathPrefix>
-            <mainClass>controller.IndexController</mainClass>
+            <mainClass>/TakeMyPet/src/main/java/controller/IndexController.java</mainClass>
           </manifest>
         </archive>
       </configuration>
