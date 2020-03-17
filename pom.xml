@@ -64,7 +64,7 @@
           <manifest>
             <addClasspath>true</addClasspath>
             <classpathPrefix>lib/</classpathPrefix>
-            <mainClass>controller.IndexController</mainClass>
+            <mainClass>IndexController</mainClass>
           </manifest>
         </archive>
       </configuration>
