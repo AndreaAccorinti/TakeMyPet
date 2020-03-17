@@ -1,1 +1,1 @@
-web: java -jar target/TakeMyPet.jar
+web: java -jar target/takemypet-1.0.0.jar
