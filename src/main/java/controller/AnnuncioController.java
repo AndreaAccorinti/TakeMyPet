@@ -61,6 +61,7 @@ public class AnnuncioController extends HttpServlet {
 		//prendere dal body la lista animali e convertirla dal Json
 		
 		
+		
 	}
 
 }
