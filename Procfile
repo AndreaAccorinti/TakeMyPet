@@ -1,1 +1,1 @@
-web: java -jar target/TakeMyPetBeta-0.0.1-SNAPSHOT.jar
+web:    java -jar target/dependency/jetty-runner.jar --port $PORT target/classes/war/*.war
