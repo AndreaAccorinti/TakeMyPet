@@ -3,9 +3,19 @@ package com.example;
 import org.eclipse.jetty.server.Server;
 import org.eclipse.jetty.webapp.WebAppContext;
 
+import model.Admin;
+import model.Proprietario;
+import utils.JPAUtil;
+
 import java.net.URI;
 import java.net.URISyntaxException;
 import java.sql.*;
+
+import javax.persistence.EntityManager;
+
+import model.Admin;
+import model.Proprietario;
+import utils.JPAUtil;
 
 /**
  * 
@@ -48,6 +58,28 @@ public class Main {
         server.start();
         server.join();  
         
+        EntityManager em = JPAUtil.getInstance().getEmf().createEntityManager();
+    	
+    	Admin a = new Admin();
+    	Proprietario ps = new Proprietario();
+    	
+    	ps.setUsername("alex");
+    	ps.setPassword("password");
+    	ps.setTipoUtente("proprietario");
+    	ps.setBloccato(false);
+    	ps.setAttivo(true);
+
+    	a.setUsername("admin");
+    	a.setPassword("password");
+    	a.setTipoUtente("admin");
+    	
+    	
+
+    	
+    	em.getTransaction().begin();
+    	em.persist(ps);
+    	em.persist(a);
+    	em.getTransaction().commit();
         
         
         Connection connection = getConnection();
@@ -62,14 +94,11 @@ public class Main {
         }
     }
     
+	
+   
     private static Connection getConnection() throws URISyntaxException, SQLException {
-        URI dbUri = new URI(System.getenv("DATABASE_URL"));
-
-        String username = dbUri.getUserInfo().split(":")[0];
-        String password = dbUri.getUserInfo().split(":")[1];
-        String dbUrl = "jdbc:postgresql://" + dbUri.getHost() + dbUri.getPath();
-
-        return DriverManager.getConnection(dbUrl, username, password);
+        String dbUrl = System.getenv("JDBC_DATABASE_URL");
+        return DriverManager.getConnection(dbUrl);
     }
     }
 
