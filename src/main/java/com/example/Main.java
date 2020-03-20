@@ -3,6 +3,10 @@ package com.example;
 import org.eclipse.jetty.server.Server;
 import org.eclipse.jetty.webapp.WebAppContext;
 
+import java.net.URI;
+import java.net.URISyntaxException;
+import java.sql.*;
+
 /**
  * 
  * This class launches the web application in an embedded Jetty container.
@@ -42,7 +46,30 @@ public class Main {
         server.setHandler(root);
         
         server.start();
-        server.join();   
+        server.join();  
+        
+        
+        
+        Connection connection = getConnection();
+        
+        Statement stmt = connection.createStatement();
+        stmt.executeUpdate("DROP TABLE IF EXISTS ticks");
+        stmt.executeUpdate("CREATE TABLE ticks (tick timestamp)");
+        stmt.executeUpdate("INSERT INTO ticks VALUES (now())");
+        ResultSet rs = stmt.executeQuery("SELECT tick FROM ticks");
+        while (rs.next()) {
+            System.out.println("Read from DB: " + rs.getTimestamp("tick"));
+        }
+    }
+    
+    private static Connection getConnection() throws URISyntaxException, SQLException {
+        URI dbUri = new URI(System.getenv("DATABASE_URL"));
+
+        String username = dbUri.getUserInfo().split(":")[0];
+        String password = dbUri.getUserInfo().split(":")[1];
+        String dbUrl = "jdbc:postgresql://" + dbUri.getHost() + dbUri.getPath();
+
+        return DriverManager.getConnection(dbUrl, username, password);
+    }
     }
 
-}

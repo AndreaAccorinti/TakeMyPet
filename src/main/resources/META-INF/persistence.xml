@@ -19,12 +19,13 @@
 		<class>model.Valutazione</class>
 		<class>model.Preferiti</class>
 		<properties>
-			<property name="javax.persistence.jdbc.driver" value="com.mysql.cj.jdbc.Driver" />
-			<property name="javax.persistence.jdbc.url" value="jdbc:mysql://localhost:3306/TakeMyPetBETA?serverTimezone=GMT" />
-			<property name="javax.persistence.jdbc.user" value="root" />
+			<property name="javax.persistence.jdbc.driver" value="org.postgresql.Driver" />
+			<property name="javax.persistence.jdbc.user" value="huqxshyhybwrja" />
 			<property name="hbm2ddl.auto" value="create"/>
-			<property name="hibernate.dialect" value="org.hibernate.dialect.MySQL8Dialect" />
+			<property name="hibernate.dialect" value="org.hibernate.dialect.PostgreSQL95Dialect" />
 			<property name="javax.persistence.schema-generation.database.action" value="create"/>
+			<property name="javax.persistence.jdbc.password" value="0de803f62dcb75a0c7ddbbef067d6288d7b6663179f77d8fd706066e019e517f"/>
+			<property name="javax.persistence.jdbc.url" value="postgres://huqxshyhybwrja:0de803f62dcb75a0c7ddbbef067d6288d7b6663179f77d8fd706066e019e517f@ec2-52-207-93-32.compute-1.amazonaws.com:5432/d420bmogvma7rs"/>
 		</properties>
 	</persistence-unit>
 </persistence>
