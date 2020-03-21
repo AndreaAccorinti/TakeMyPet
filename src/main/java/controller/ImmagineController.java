@@ -118,7 +118,7 @@ public class ImmagineController extends HttpServlet {
 		os.close();
 		
 		//mettere sito app o localhost o ip computer server
-		String urlImmagine = "http://192.168.1.103:8080/immaginiPerWeb/" + username +".jpg";
+		String urlImmagine = "https://takemypet.herokuapp.com//immaginiPerWeb/" + username +".jpg";
 		
 		uam.inserisciImmagine(username, urlImmagine);
 		
