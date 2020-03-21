@@ -58,7 +58,22 @@ public class Main {
         server.start();
         server.join();  
         
-        EntityManager em = JPAUtil.getInstance().getEmf().createEntityManager();
+     
+        
+        
+        Connection connection = getConnection();
+        
+        Statement stmt = connection.createStatement();
+        stmt.executeUpdate("DROP TABLE IF EXISTS ticks");
+        stmt.executeUpdate("CREATE TABLE ticks (tick timestamp)");
+        stmt.executeUpdate("INSERT INTO ticks VALUES (now())");
+        ResultSet rs = stmt.executeQuery("SELECT tick FROM ticks");
+        while (rs.next()) {
+            System.out.println("Read from DB: " + rs.getTimestamp("tick"));
+        }
+        
+        
+   EntityManager em = JPAUtil.getInstance().getEmf().createEntityManager();
     	
     	Admin a = new Admin();
     	Proprietario ps = new Proprietario();
@@ -80,18 +95,6 @@ public class Main {
     	em.persist(ps);
     	em.persist(a);
     	em.getTransaction().commit();
-        
-        
-        Connection connection = getConnection();
-        
-        Statement stmt = connection.createStatement();
-        stmt.executeUpdate("DROP TABLE IF EXISTS ticks");
-        stmt.executeUpdate("CREATE TABLE ticks (tick timestamp)");
-        stmt.executeUpdate("INSERT INTO ticks VALUES (now())");
-        ResultSet rs = stmt.executeQuery("SELECT tick FROM ticks");
-        while (rs.next()) {
-            System.out.println("Read from DB: " + rs.getTimestamp("tick"));
-        }
     }
     
 	
@@ -100,5 +103,9 @@ public class Main {
         String dbUrl = System.getenv("JDBC_DATABASE_URL");
         return DriverManager.getConnection(dbUrl);
     }
+    
+    
+    
+    
     }
 
